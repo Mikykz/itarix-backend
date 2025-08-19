@@ -1,0 +1,6 @@
+@itarixapi_HostAddress = http://localhost:5204
+
+GET {{itarixapi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

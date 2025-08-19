@@ -1,0 +1,21 @@
+## Ignore Visual Studio files
+.vs/
+bin/
+obj/
+*.user
+*.suo
+
+## Ignore environment files
+.env
+*.env
+
+## Ignore logs
+*.log
+
+## Ignore backups
+*.tmp
+*.bak
+
+## Ignore appsettings (contains secrets)
+appsettings.json
+appsettings.*.json
