@@ -37,9 +37,12 @@ namespace itarixapi
 
             // ---------- Forwarded Headers for proxy/CDN ----------
             builder.Services.AddHttpContextAccessor();
+            // Forwarded headers (trust Azure front-ends)
             builder.Services.Configure<ForwardedHeadersOptions>(o =>
             {
                 o.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+                o.KnownNetworks.Clear();
+                o.KnownProxies.Clear();
             });
 
             // ---------- JWT Authentication ----------
@@ -165,6 +168,11 @@ namespace itarixapi
 
             // ---------- Endpoints ----------
             app.MapControllers();
+            // Root + health so Production doesn’t 404 at /
+            app.MapGet("/", () => Results.Text("itarixapi is running"));
+            app.MapGet("/health", () => Results.Ok("ok"));      // keep a plain /health
+            app.MapGet("/api/health", () => Results.Ok("ok"));
+
 
             app.Run();
         }
